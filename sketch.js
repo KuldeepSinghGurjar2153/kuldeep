@@ -1,42 +1,43 @@
-var trex ,trex_running, edges;
-var groundImage;
+var btn_red;
+var btn_green;
 
-function preload(){
-    trex_running = loadAnimation("trex1.png","trex3.png","trex4.png");
-    groundImage = loadImage("ground2.png")
-}
+var r = 0;
+var g = 0;
+var b = 0;
 
 
 function setup(){
-    createCanvas(600,200);
 
-trex = createSprite(50,160,20,50);
-trex.addAnimation("running", trex_running);
-edges = createEdgesSprites();
+  
+createCanvas(400, 400);
+btn_red = createButton("RED");
+btn_red.position(100,50);
+btn_red.mousePressed(red_bg);
 
-
-
-trex.scale = 0.5;
-trex.x = 50;
-ground-createSprite(200,180,400,2);
-ground.addImage("ground",groundImage);
-ground.x=ground.width/2;
+btn_green = createButton("GREEN");
+btn_green.position(150,50);
+btn_green.mousePressed(green_bg);
 
 }
-
 
 function draw(){
-background("white");
-console.log(trex.y)
+background(r,g,b);
 
-if(keyDown("space")){
-trex.velocityY = -10;
+
+}
+function red_bg(){
+r = 255;
+g = 0;
+b = 0;
+
 }
 
-trex.collide(ground)
-if(ground.x<0){
+function green_bg(){
 
-    ground.x=ground.width/2;
+r = 0;
+g = 255;
+b = 0;
 
-    drawSprites();
+
 }
+
