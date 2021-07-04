@@ -1,43 +1,46 @@
-var btn_red;
-var btn_green;
+var shipImg,ship,seaImage,sea;
+function preload() {
+  
+ shipImg=loadAnimation("ship1.png", "ship2.png") 
+ seaImage=loadImage("sea.png") 
 
-var r = 0;
-var g = 0;
-var b = 0;
+}
+function setup() {
+  createCanvas(600,300);
+  
+  ship=createSprite(70,180,20,20)
+  ship.addAnimation("ship",shipImg)
+ship.scale=0.2
+sea=createSprite(10,200,600,10);
+sea.x=sea.width/2
+sea.velocityX=-2;
+sea.visible=false
+}
+function draw() {
+  
+  background(seaImage)
+  if (keyDown("space")) {
+  ship.velocityY = -10;
+}
 
+ship.velocityY = ship.velocityY + 0.8
 
-function setup(){
+if (sea.x < 0) {
+  sea.x = sea.width / 2;
+}
+
+ship.collide(sea);
+drawSprites();
+  
+}  
+  
+  
 
   
-createCanvas(400, 400);
-btn_red = createButton("RED");
-btn_red.position(100,50);
-btn_red.mousePressed(red_bg);
-
-btn_green = createButton("GREEN");
-btn_green.position(150,50);
-btn_green.mousePressed(green_bg);
-
-}
-
-function draw(){
-background(r,g,b);
+  
+  
 
 
-}
-function red_bg(){
-r = 255;
-g = 0;
-b = 0;
-
-}
-
-function green_bg(){
-
-r = 0;
-g = 255;
-b = 0;
 
 
-}
-
+ 
