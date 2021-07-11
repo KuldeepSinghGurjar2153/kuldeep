@@ -1,49 +1,73 @@
-var shipImg,ship,seaImage,sea;
-function preload() {
-  
- shipImg=loadAnimation("ship-1.png", "ship-2.png", "ship-1.png", "ship-2.png")
- seaImage=loadImage("sea.png")
+var garden,rabbit;
+var gardenImg,rabbitImg;
+var apple, appleImg
+var leaf, leafImg
+var orangeLeaf, orangeLeafImg;
 
-}
-function setup() {
-  
-  createCanvas(600,300);
-  background(0);
-  
-  ship=createSprite(70,180,20,20)
-  ship.addAnimation("ship",shipImg)
-ship.scale=0.2;
 
-sea=createSprite(10,200,600,10);
-sea.addImage(seaImage);
-sea.velocityX=-5;
-sea.scale=0.3;
+function preload(){
+  gardenImg = loadImage("garden.png");
+  rabbitImg = loadImage("rabbit.png");
+  appleImg = loadImage("apple.png")
+  leafImg = loadImage("leaf.png")
+  orangeLeafImg = loadImage("orangeLeaf.png");
 }
+
+function setup(){
+  
+  createCanvas(400,400);
+  
+// Moving background
+garden=createSprite(200,200);
+garden.addImage(gardenImg);
+
+//creating boy running
+rabbit = createSprite(180,340,30,30);
+rabbit.scale =0.09;
+rabbit.addImage(rabbitImg);
+}
+
+
 function draw() {
-  
   background(0);
-  sea.velocityX=-3;
-  if(sea.x<0){
-    sea.x = sea.width/8;
-    
-    }
-
-
-
-
-sea.depth=ship.depth
-ship.depth=ship.depth+1;
-drawSprites();
-
-  }
   
+  edges= createEdgeSprites();
+  rabbit.collide(edges);
+  rabbit.x=World.mouseX
+  var select_sprites = Math.round(random(1,3));
+  if (frameCount % 80 == 0) {
+  if (select_sprites  == 1) 
+  { createApples(); }
+  else if  (select_sprites == 2) {         createApples(); }
+else {  createApples(); } }
+  drawSprites();
   
+  var select_sprites = Math.round(random(1,3));
+  if (frameCount % 100 == 0) {
+  if (select_sprites  == 1) 
+  { createLeaves(); }
+  else if  (select_sprites == 5) {
+    createLeaves(); }
+else {  createLeaves(); } }
 
-  
-  
-  
 
 
 
+  drawSprites();
+}
+function createApples() {
+apple=createSprite(random(50,350),40,10,10)
+apple.addImage(appleImg);
+apple.scale=0.1;
+apple.velocityY=5;
+apple.lifetime=150;
+}
+function createLeaves() {
+leaf=createSprite(random(50,350),40,10,10)
+leaf.addImage(leafImg);
+leaf.scale=0.1;
+leaf.velocityY=5;
+leaf.lifetime=150;
+}
 
- 
+
